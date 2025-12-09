@@ -1,26 +1,51 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Oswald:wght@200..700&display=swap");
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+	/* Hyper-Sport Dark Palette (Porsche Design / Cyberpunk) */
+	--background: #09090b; /* Zinc 950 - Deepest Black */
+	--foreground: #ffffffbf; /* White with 75% Opacity as requested */
+	--font-oswald: "Oswald", sans-serif;
+	--font-inter: "Inter", sans-serif;
+
+	--primary: #007fff; /* Azure Blue - High Tech/Rigid */
+	--primary-foreground: #000000;
+
+	--secondary: #27272a; /* Zinc 800 - Gunmetal */
+	--secondary-foreground: #ffffff;
+
+	--muted: #18181b; /* Zinc 900 */
+	--muted-foreground: #a1a1aa; /* Zinc 400 */
+
+	--accent: #007fff; /* Same as primary for now, electric feel */
+	--accent-foreground: #000000;
+
+	--border: #27272a; /* Zinc 800 */
+	--ring: #007fff;
+
+	/* Tech Fonts */
+	--font-sans: var(--font-inter);
+	--font-heading: var(--font-oswald);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* Dark mode overrides if needed later, but user requested white background as main base */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@theme {
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--color-primary: var(--primary);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-secondary: var(--secondary);
+	--color-secondary-foreground: var(--secondary-foreground);
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-accent: var(--accent);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-border: var(--border);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+	background-color: var(--background);
+	color: var(--foreground);
+	font-family: var(--font-sans, system-ui, sans-serif);
 }
