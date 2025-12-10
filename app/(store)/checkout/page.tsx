@@ -20,10 +20,10 @@ export default function CheckoutPage() {
         }
 
         const productDetails = items.map(item =>
-            `• ${item.title} (Qty: ${item.quantity}) - $${item.price}`
+            `• ${item.title} (Qty: ${item.quantity}) - Rs ${item.price.toLocaleString()}`
         ).join('\n')
 
-        const totalAmount = `$${total.toFixed(2)}`
+        const totalAmount = `Rs ${total.toLocaleString()}`
 
         // Note: Template literal is flush left to prevent extra spaces in the message
         const message = `
@@ -54,8 +54,8 @@ Ref ID: ${Math.random().toString(36).substring(7).toUpperCase()}
                 <div className="w-24 h-24 bg-zinc-900 rounded-full flex items-center justify-center border border-zinc-800">
                     <AlertTriangle size={48} className="text-zinc-600" />
                 </div>
-                <h1 className="text-4xl font-black text-white uppercase font-heading italic tracking-tighter">System Empty</h1>
-                <p className="text-zinc-400 max-w-md mx-auto">Your component inventory is currently offline. Navigate to the store to initialize a new order.</p>
+                <h1 className="text-4xl font-black text-white uppercase font-heading italic tracking-tighter">Cart Empty</h1>
+                <p className="text-zinc-400 max-w-md mx-auto">Your cart is currently empty. Navigate to the store to initialize a new order.</p>
                 <Link href="/store" className="bg-primary text-black font-bold uppercase tracking-widest px-8 py-3 clip-path-slant hover:bg-white transition-colors">
                     Return to Store
                 </Link>
@@ -73,7 +73,7 @@ Ref ID: ${Math.random().toString(36).substring(7).toUpperCase()}
                     <div className="bg-zinc-900/40 border border-zinc-800 p-4 md:p-8 rounded-sm backdrop-blur-md">
                         <h2 className="text-lg md:text-xl font-bold text-white uppercase tracking-wider mb-6 flex items-center gap-2">
                             <span className="w-2 h-8 bg-primary block"></span>
-                            Item Manifest
+                            Order Summary
                         </h2>
 
                         <div className="space-y-4 md:space-y-6">
@@ -98,11 +98,11 @@ Ref ID: ${Math.random().toString(36).substring(7).toUpperCase()}
                                         <h3 className="hidden sm:block text-lg font-bold text-white uppercase tracking-wide">{item.title}</h3>
                                         <div className="flex justify-between sm:justify-start items-center gap-4 mt-2 text-sm font-mono text-zinc-400">
                                             <span>Qty: {item.quantity}</span>
-                                            <span className="text-primary">${item.price}</span>
+                                            <span className="text-primary">Rs {item.price.toLocaleString()}</span>
                                         </div>
                                     </div>
                                     <div className="text-lg md:text-xl font-bold text-white font-heading italic self-end sm:self-center">
-                                        ${(item.price * item.quantity).toFixed(2)}
+                                        Rs {(item.price * item.quantity).toLocaleString()}
                                     </div>
                                 </div>
                             ))}
@@ -110,7 +110,7 @@ Ref ID: ${Math.random().toString(36).substring(7).toUpperCase()}
 
                         <div className="mt-8 pt-8 border-t border-zinc-800 flex flex-col sm:flex-row justify-between items-center gap-4 text-xl font-bold text-white uppercase">
                             <span className="text-base md:text-xl">Total Estimated Value</span>
-                            <span className="text-primary text-3xl font-heading italic">${total.toFixed(2)}</span>
+                            <span className="text-primary text-3xl font-heading italic">Rs {total.toLocaleString()}</span>
                         </div>
                     </div>
                 </div>
@@ -123,12 +123,12 @@ Ref ID: ${Math.random().toString(36).substring(7).toUpperCase()}
                             <div className="flex items-start gap-4">
                                 <ShieldAlert className="text-red-500 shrink-0 mt-1" size={28} />
                                 <div>
-                                    <h3 className="text-red-500 font-bold uppercase tracking-widest text-sm mb-2">Payment Integrity Check Failed</h3>
+                                    <h3 className="text-red-500 font-bold uppercase tracking-widest text-sm mb-2">Online Payment Unavailable</h3>
                                     <p className="text-red-200/70 text-sm leading-relaxed mb-4">
-                                        Direct automated payment gateways are currently offline for maintenance. Security protocols prevent standard transaction processing at this time.
+                                        Direct automated payment gateways are currently offline for maintenance.
                                     </p>
                                     <div className="text-xs font-mono text-red-500/50 uppercase tracking-widest">
-                                        Error Code: SEC_GATEWAY_503
+                                        Error Code: 503
                                     </div>
                                 </div>
                             </div>
@@ -149,9 +149,6 @@ Ref ID: ${Math.random().toString(36).substring(7).toUpperCase()}
                             Chat on WhatsApp
                         </button>
 
-                        <p className="text-center text-xs text-zinc-600 font-mono uppercase tracking-widest">
-                            Authorized Dealer Access
-                        </p>
                     </div>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Toaster } from "sonner";
+import { Toaster } from "@/components/ui/sonner";
 import { CartProvider } from "@/context/CartContext";
 import { CartSidebar } from "@/components/store/CartSidebar";
 import "./globals.css";
@@ -22,7 +22,7 @@ export default function RootLayout({
         <CartProvider>
           {children}
           <CartSidebar />
-          <Toaster richColors position="top-right" />
+          <Toaster />
         </CartProvider>
       </body>
     </html>

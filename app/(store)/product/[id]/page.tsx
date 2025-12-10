@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { Check, ShoppingCart, Truck, ShieldCheck } from 'lucide-react'
 import { ProductCard } from '@/components/store/ProductCard'
 import { AddToCartButton } from '@/components/store/AddToCartButton'
+import { ProductImageGallery } from '@/components/store/ProductImageGallery'
 
 export default async function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
     const supabase = await createClient()
@@ -42,31 +43,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 mb-12 md:mb-24">
                     {/* Images */}
-                    <div className="space-y-4 md:space-y-6">
-                        <div className="aspect-square bg-zinc-900 border border-zinc-800 relative overflow-hidden group rounded-sm">
-                            {/* Tech Overlay */}
-                            <div className="absolute top-4 left-4 z-10">
-                                <span className="bg-primary text-black text-[10px] font-bold px-2 py-1 uppercase tracking-widest clip-path-slant">
-                                    System View
-                                </span>
-                            </div>
-
-                            {product.images?.[0] ? (
-                                // eslint-disable-next-line @next/next/no-img-element
-                                <img src={product.images[0]} alt={product.title} className="object-cover w-full h-full opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out" />
-                            ) : (
-                                <div className="w-full h-full flex items-center justify-center text-zinc-700 font-mono text-sm uppercase tracking-widest">Image Signal Lost</div>
-                            )}
-                        </div>
-                        <div className="grid grid-cols-4 gap-2 md:gap-4">
-                            {product.images?.map((img: string, idx: number) => (
-                                <div key={idx} className={`aspect-square rounded-sm overflow-hidden border cursor-pointer relative bg-zinc-900 ${idx === 0 ? 'border-primary ring-1 ring-primary/50' : 'border-zinc-800 hover:border-zinc-600'}`}>
-                                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                                    <img src={img} alt="" className="object-cover w-full h-full opacity-80 hover:opacity-100 transition-opacity" />
-                                </div>
-                            ))}
-                        </div>
-                    </div>
+                    <ProductImageGallery images={product.images || []} title={product.title} />
 
                     {/* Info Panel */}
                     <div className="space-y-6 md:space-y-8 relative">
@@ -79,20 +56,20 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                                 {product.stock > 0 ? (
                                     <span className="flex items-center gap-2 text-[10px] md:text-xs text-primary font-bold uppercase tracking-widest">
                                         <span className="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
-                                        System Online
+                                        In Stock
                                     </span>
                                 ) : (
                                     <span className="flex items-center gap-2 text-[10px] md:text-xs text-red-500 font-bold uppercase tracking-widest">
                                         <span className="w-2 h-2 bg-red-500 rounded-full"></span>
-                                        Offline
+                                        Out of Stock
                                     </span>
                                 )}
                             </div>
                         </div>
 
                         <div className="text-4xl md:text-6xl font-black text-white font-heading italic tracking-tighter flex items-start gap-1">
-                            <span className="text-xl md:text-2xl text-zinc-500 mt-2 font-sans not-italic">$</span>
-                            {product.price}
+                            <span className="text-xl md:text-2xl text-zinc-500 mt-2 font-sans not-italic">RS</span>
+                            {product.price.toLocaleString()}
                         </div>
 
                         <p className="text-zinc-300 leading-relaxed text-lg font-light tracking-wide max-w-xl border-l-2 border-zinc-800 pl-6">

@@ -151,7 +151,7 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
 
                     <div className="grid grid-cols-2 gap-6">
                         <div className="space-y-3">
-                            <label className="text-[10px] font-bold text-primary uppercase tracking-widest">Price ($)</label>
+                            <label className="text-[10px] font-bold text-primary uppercase tracking-widest">Price (Rs.)</label>
                             <input
                                 type="number"
                                 step="0.01"

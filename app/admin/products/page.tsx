@@ -105,7 +105,7 @@ export default async function ProductsPage({
                                     <td className="px-6 py-4 text-zinc-400 font-mono text-xs">{product.sku}</td>
                                     {/* @ts-ignore: categories is joined */}
                                     < td className="px-6 py-4 text-zinc-500 uppercase text-xs tracking-wider" > {product.categories?.name || '-'}</td>
-                                    <td className="px-6 py-4 text-white font-bold font-mono text-lg">${product.price}</td>
+                                    <td className="px-6 py-4 text-white font-bold font-mono text-lg">Rs {product.price.toLocaleString()}</td>
                                     <td className="px-6 py-4">
                                         <span
                                             className={`inline-flex items-center px-2 py-0.5 rounded-sm text-[10px] uppercase font-bold tracking-widest border ${product.stock > 10

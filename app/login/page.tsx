@@ -1,70 +1,76 @@
 'use client'
 
 import { login, signup } from './actions'
-import { useActionState } from 'react'
-
-const initialState = {
-    error: null,
-}
+// import { useActionState } from 'react'
 
 export default function LoginPage() {
-    // We'll just use a simple form for now, referencing the server action directly in `action`
-    // To handle errors properly with useActionState/useFormState in Next.js 15:
-    // For simplicity in this iteration, I'll wrap the form submission.
-
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50">
-            <div className="max-w-md w-full p-8 bg-white shadow-xl rounded-lg border border-gray-100">
-                <div className="text-center mb-8">
-                    <h1 className="text-3xl font-bold text-foreground">Admin Access</h1>
-                    <p className="text-gray-500 mt-2">Sign in to manage your auto-parts store</p>
+        <div className="min-h-screen flex items-center justify-center bg-zinc-950 relative overflow-hidden text-zinc-200 font-mono">
+            {/* Background Grid */}
+            <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[24px_24px]"></div>
+                <div className="absolute inset-0 bg-linear-to-b from-zinc-950/50 via-zinc-950/80 to-zinc-950"></div>
+            </div>
+
+            <div className="max-w-md w-full p-8 relative z-10">
+                <div className="mb-12 text-center">
+                    <div className="w-16 h-16 bg-zinc-900 mx-auto rounded-sm border border-zinc-800 flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(250,204,21,0.1)] group">
+                        <div className="w-8 h-8 bg-primary transform skew-x-[-10deg] flex items-center justify-center">
+                            <span className="font-black text-black">RT</span>
+                        </div>
+                    </div>
+                    <h1 className="text-4xl font-black text-white uppercase tracking-tighter font-heading italic">Admin <span className="text-primary">Panel</span></h1>
+                    <p className="text-zinc-500 mt-2 text-xs uppercase tracking-widest">Sign in to continue</p>
                 </div>
 
-                <form className="space-y-6">
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                        <input
-                            type="email"
-                            name="email"
-                            required
-                            className="w-full px-4 py-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
-                            placeholder="admin@example.com"
-                        />
-                    </div>
+                <div className="bg-zinc-900/40 backdrop-blur-md border border-zinc-800 p-8 rounded-sm relative overflow-hidden cursor-default">
+                    {/* Corner Accents */}
+                    <div className="absolute top-0 right-0 w-8 h-8 border-t border-r border-primary/30"></div>
+                    <div className="absolute bottom-0 left-0 w-8 h-8 border-b border-l border-primary/30"></div>
 
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
-                        <input
-                            type="password"
-                            name="password"
-                            required
-                            className="w-full px-4 py-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
-                            placeholder="••••••••"
-                        />
-                    </div>
+                    <form className="space-y-6 relative z-10">
+                        <div className="space-y-2">
+                            <label className="text-[10px] font-bold text-primary uppercase tracking-widest">Email</label>
+                            <input
+                                type="email"
+                                name="email"
+                                required
+                                className="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 text-white placeholder-zinc-700 focus:border-primary focus:ring-1 focus:ring-primary/50 outline-none transition-all rounded-sm text-sm font-mono"
+                                placeholder="admin@example.com"
+                            />
+                        </div>
 
-                    <div className="flex flex-col gap-4">
-                        <button
-                            formAction={async (formData) => {
-                                const res = await login(formData);
-                                if (res?.error) alert(res.error);
-                            }}
-                            className="w-full bg-primary text-primary-foreground font-semibold py-3 rounded-md hover:bg-yellow-400 transition-colors shadow-md"
-                        >
-                            Sign In
-                        </button>
+                        <div className="space-y-2">
+                            <label className="text-[10px] font-bold text-primary uppercase tracking-widest">Password</label>
+                            <input
+                                type="password"
+                                name="password"
+                                required
+                                className="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 text-white placeholder-zinc-700 focus:border-primary focus:ring-1 focus:ring-primary/50 outline-none transition-all rounded-sm text-sm font-mono"
+                                placeholder="••••••••"
+                            />
+                        </div>
 
-                        <button
-                            formAction={async (formData) => {
-                                const res = await signup(formData);
-                                if (res?.error) alert(res.error);
-                            }}
-                            className="w-full bg-white text-gray-700 font-semibold py-3 rounded-md hover:bg-gray-100 transition-colors border border-gray-300"
-                        >
-                            Sign Up
-                        </button>
-                    </div>
-                </form>
+                        <div className="pt-4 flex flex-col gap-4">
+                            <button
+                                formAction={async (formData) => {
+                                    const res = await login(formData);
+                                    if (res?.error) alert(res.error);
+                                }}
+                                className="w-full bg-primary text-black font-black uppercase tracking-wider py-4 hover:bg-white hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] transition-all clip-path-slant shadow-[0_0_15px_rgba(250,204,21,0.3)] relative group overflow-hidden"
+                            >
+                                <span className="relative z-10">Sign In</span>
+                                <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                            </button>
+
+
+                        </div>
+                    </form>
+                </div>
+
+                <div className="mt-8 text-center">
+                    <p className="text-[10px] text-zinc-700 font-mono uppercase">Secure Connection Established • v2.4.0</p>
+                </div>
             </div>
         </div>
     )

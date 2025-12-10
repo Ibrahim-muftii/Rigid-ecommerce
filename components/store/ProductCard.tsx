@@ -21,7 +21,6 @@ export function ProductCard({ product }: { product: ProductHeadingProps }) {
         >
             {/* Tech Corner Accent */}
             <div className="absolute top-0 right-0 w-12 h-12 bg-zinc-800/50 clip-path-corner z-10 group-hover:bg-primary transition-colors duration-300 flex items-center justify-center backdrop-blur-sm">
-                <div className="text-white group-hover:text-black transition-colors transform -rotate-45 font-bold text-xs">GO</div>
             </div>
 
             <div className="aspect-square bg-zinc-950 relative overflow-hidden">
@@ -57,7 +56,7 @@ export function ProductCard({ product }: { product: ProductHeadingProps }) {
                 <div className="mt-auto flex items-end justify-between border-t border-zinc-800 pt-4">
                     <div className="flex flex-col">
                         <span className="text-xs text-zinc-400 font-mono uppercase">Price</span>
-                        <span className="text-xl font-bold text-white tracking-tight">${product.price}</span>
+                        <span className="text-xl font-bold text-white tracking-tight">Rs {product.price.toLocaleString()}</span>
                     </div>
                     <span className="text-xs font-bold text-zinc-400 uppercase group-hover:text-white transition-colors flex items-center gap-1 group/btn">
                         View <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="text-primary group-hover/btn:translate-x-1 transition-transform"><path d="m9 18 6-6-6-6" /></svg>

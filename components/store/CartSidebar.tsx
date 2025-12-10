@@ -37,7 +37,7 @@ export function CartSidebar() {
                     {items.length === 0 ? (
                         <div className="h-full flex flex-col items-center justify-center text-center space-y-4 text-zinc-500">
                             <ShoppingBag size={48} className="opacity-20" />
-                            <p className="font-mono uppercase text-sm tracking-widest">System Empty</p>
+                            <p className="font-mono uppercase text-sm tracking-widest">Cart is Empty</p>
                             <button onClick={toggleCart} className="text-primary text-xs font-bold uppercase hover:underline">Return to Store</button>
                         </div>
                     ) : (
@@ -54,7 +54,7 @@ export function CartSidebar() {
                                 <div className="flex-1 flex flex-col justify-between">
                                     <div>
                                         <h3 className="text-zinc-200 font-bold text-sm uppercase tracking-wide line-clamp-2">{item.title}</h3>
-                                        <p className="text-primary font-mono text-sm mt-1">${item.price}</p>
+                                        <p className="text-primary font-mono text-sm mt-1">Rs {item.price.toLocaleString()}</p>
                                     </div>
                                     <div className="flex items-center justify-between mt-2">
                                         <span className="text-xs text-zinc-500 font-mono">QTY: {item.quantity}</span>
@@ -75,7 +75,7 @@ export function CartSidebar() {
                     <div className="p-6 border-t border-zinc-800 bg-zinc-900/50 space-y-4">
                         <div className="flex items-center justify-between text-zinc-400 font-mono text-sm uppercase">
                             <span>Subtotal</span>
-                            <span className="text-white font-bold text-lg">${total.toFixed(2)}</span>
+                            <span className="text-white font-bold text-lg">Rs {total.toLocaleString()}</span>
                         </div>
                         <Link href="/checkout" onClick={toggleCart} className="w-full bg-primary text-black font-black uppercase tracking-widest py-4 hover:bg-white transition-colors clip-path-slant shadow-[0_0_20px_rgba(250,204,21,0.2)] block text-center">
                             Proceed to Checkout
