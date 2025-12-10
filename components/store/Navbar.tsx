@@ -52,7 +52,7 @@ export function Navbar() {
                         <ShoppingCart size={22} className="text-zinc-400 group-hover:text-primary transition-colors" />
                         {cartCount > 0 && (
                             <span className="absolute -top-2 -right-2 bg-primary text-black text-[10px] font-bold h-4 w-4 flex items-center justify-center rounded-sm skew-x-[-10deg] shadow-lg animate-in zoom-in">
-                                <span className="skew-x-[10deg]">{cartCount}</span>
+                                <span className="skew-x-10">{cartCount}</span>
                             </span>
                         )}
                     </button>
@@ -70,7 +70,7 @@ export function Navbar() {
             {/* Mobile Menu Overlay */}
             {isMenuOpen && (
                 <div
-                    className="fixed inset-0 z-[100] h-[375px] flex flex-col p-0 md:hidden animate-in slide-in-from-bottom-10 fade-in duration-300 bg-black/80"
+                    className="fixed inset-0 z-100 h-[375px] flex flex-col p-0 md:hidden animate-in slide-in-from-bottom-10 fade-in duration-300 bg-black/80"
                 >
                     <div style={{ backdropFilter: 'blur(24px)', WebkitBackdropFilter: 'blur(24px)' }} className='w-full h-full flex flex-col'>
                         <div className="flex justify-end mb-16 pt-4">

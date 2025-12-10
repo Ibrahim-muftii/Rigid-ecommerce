@@ -34,8 +34,8 @@ export function HeroCarousel({ banners }: { banners: Banner[] }) {
                 >
                     <div className="absolute inset-0 bg-black/40 z-10" />
                     {/* Gradient Overlays */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-black via-black/50 to-transparent z-10" />
-                    <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-background to-transparent z-20" />
+                    <div className="absolute inset-0 bg-linear-to-r from-black via-black/50 to-transparent z-10" />
+                    <div className="absolute bottom-0 left-0 w-full h-32 bg-linear-to-t from-background to-transparent z-20" />
 
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
@@ -58,13 +58,13 @@ export function HeroCarousel({ banners }: { banners: Banner[] }) {
                                 <span className="block transform -skew-x-12 origin-left">Engineering</span>
                             </h1>
 
-                            <p className="text-sm md:text-2xl text-gray-300 font-medium tracking-wide max-w-2xl border-l-4 border-primary pl-4 md:pl-6 py-2 bg-gradient-to-r from-black/50 to-transparent backdrop-blur-sm">
+                            <p className="text-sm md:text-2xl text-gray-300 font-medium tracking-wide max-w-2xl border-l-4 border-primary pl-4 md:pl-6 py-2 bg-linear-to-r from-black/50 to-transparent backdrop-blur-sm">
                                 Upgrade your machine with premium high-performance components.
                             </p>
 
                             <div className="pt-4 md:pt-8 flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6">
-                                <button className="group relative bg-primary text-black font-black text-sm md:text-lg px-6 py-3 md:px-10 md:py-5 clip-path-slant hover:bg-white transition-all shadow-[0_0_20px_rgba(250,204,21,0.3)] hover:shadow-[0_0_40px_rgba(255,255,255,0.4)] skew-x-[-12deg]">
-                                    <span className="relative z-10 flex items-center gap-2 uppercase tracking-widest font-heading italic skew-x-[12deg]">
+                                <button className="group relative bg-primary text-black font-black text-sm md:text-lg px-6 py-3 md:px-10 md:py-5 clip-path-slant hover:bg-white transition-all shadow-[0_0_20px_rgba(250,204,21,0.3)] hover:shadow-[0_0_40px_rgba(255,255,255,0.4)] -skew-x-12">
+                                    <span className="relative z-10 flex items-center gap-2 uppercase tracking-widest font-heading italic skew-x-12">
                                         Shop Now <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
                                     </span>
                                 </button>

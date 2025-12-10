@@ -3,19 +3,20 @@
 import { useCart } from '@/context/CartContext'
 import { AlertTriangle, MessageCircle, ShieldAlert } from 'lucide-react'
 import Image from 'next/image'
+import { getPhoneNumber } from '@/app/actions/config'
 import Link from 'next/link'
-const PHONE_NUMBER = process.env.NEXT_PUBLIC_PHONE_NUMBER;
 
 export default function CheckoutPage() {
     const { items, cartCount } = useCart()
     const total = items.reduce((acc, item) => acc + (item.price * item.quantity), 0)
 
-    const handleWhatsAppCheckout = () => {
+    const handleWhatsAppCheckout = async () => {
+        const PHONE_NUMBER = await getPhoneNumber()
         // Validation check for phone number
         if (!PHONE_NUMBER) {
             // Config error: Phone number missing
-
-            // Proceeding with fallback or alerting would be ideal, but for now we proceed
+            console.error("Phone number not configured")
+            return
         }
 
         const productDetails = items.map(item =>
@@ -79,7 +80,7 @@ Ref ID: ${Math.random().toString(36).substring(7).toUpperCase()}
                             {items.map((item) => (
                                 <div key={item.id} className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-start sm:items-center p-4 bg-zinc-950/50 border border-zinc-900 rounded-sm">
                                     <div className="flex items-center gap-4 w-full sm:w-auto">
-                                        <div className="relative w-20 h-20 md:w-24 md:h-24 bg-zinc-900 rounded-sm overflow-hidden border border-zinc-800 flex-shrink-0">
+                                        <div className="relative w-20 h-20 md:w-24 md:h-24 bg-zinc-900 rounded-sm overflow-hidden border border-zinc-800 shrink-0">
                                             {item.image ? (
                                                 // eslint-disable-next-line @next/next/no-img-element
                                                 <img src={item.image} alt={item.title} className="w-full h-full object-cover" />

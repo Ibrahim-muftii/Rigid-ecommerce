@@ -26,7 +26,7 @@ export function ProductCard({ product }: { product: ProductHeadingProps }) {
 
             <div className="aspect-square bg-zinc-950 relative overflow-hidden">
                 {/* Image Overlay Gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10 opacity-60 group-hover:opacity-40 transition-opacity" />
+                <div className="absolute inset-0 bg-linear-to-t from-black/80 to-transparent z-10 opacity-60 group-hover:opacity-40 transition-opacity" />
 
                 {product.images?.[0] ? (
                     // eslint-disable-next-line @next/next/no-img-element

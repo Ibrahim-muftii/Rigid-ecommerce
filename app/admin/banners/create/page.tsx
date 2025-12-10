@@ -1,14 +1,13 @@
 'use client'
 
 import { useState } from 'react'
-import { createClient } from '@/utils/supabase/client'
 import { createBanner } from '../actions'
+import { uploadImage } from '@/app/actions/upload'
 import { toast } from 'sonner'
 import { Loader2, Upload } from 'lucide-react'
 
 // Simple form component
 function BannerForm() {
-    const supabase = createClient()
     const [imageUrl, setImageUrl] = useState('')
     const [uploading, setUploading] = useState(false)
 
@@ -18,21 +17,14 @@ function BannerForm() {
             if (!e.target.files || e.target.files.length === 0) return
 
             const file = e.target.files[0]
-            const fileExt = file.name.split('.').pop()
-            const fileName = `banner-${Math.random()}.${fileExt}`
-            const filePath = `${fileName}`
+            const formData = new FormData()
+            formData.append('file', file)
 
-            const { error: uploadError } = await supabase.storage
-                .from('banners')
-                .upload(filePath, file)
+            const { success, url, error } = await uploadImage(formData)
 
-            if (uploadError) throw uploadError
+            if (!success || error) throw new Error(error || 'Upload failed')
 
-            const { data: { publicUrl } } = supabase.storage
-                .from('banners')
-                .getPublicUrl(filePath)
-
-            setImageUrl(publicUrl)
+            setImageUrl(url)
             toast.success('Banner uploaded')
         } catch (error: any) {
             toast.error('Error uploading banner: ' + error.message)
@@ -111,7 +103,7 @@ export default function CreateBannerPage() {
 
             <div className="bg-zinc-900/40 border border-zinc-800 p-8 rounded-sm backdrop-blur-md relative overflow-hidden">
                 {/* Tech Overlay Lines */}
-                <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent"></div>
+                <div className="absolute top-0 left-0 w-full h-px bg-linear-to-r from-transparent via-primary/20 to-transparent"></div>
                 <div className="absolute bottom-0 right-0 w-24 h-24 bg-primary/5 blur-3xl rounded-full"></div>
 
                 <BannerForm />

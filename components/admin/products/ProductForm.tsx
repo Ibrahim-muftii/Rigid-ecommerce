@@ -5,7 +5,8 @@ import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
-import { createClient } from '@/utils/supabase/client'
+import { uploadImage } from '@/app/actions/upload'
+import { createProduct, updateProduct } from '@/app/admin/products/actions'
 import { Loader2, Upload, X } from 'lucide-react'
 import { toast } from 'sonner'
 import Image from 'next/image'
@@ -40,7 +41,6 @@ interface ProductFormProps {
 
 export function ProductForm({ categories, initialData }: ProductFormProps) {
     const router = useRouter()
-    const supabase = createClient()
     const [loading, setLoading] = useState(false)
     const [uploading, setUploading] = useState(false)
     const [images, setImages] = useState<string[]>(initialData?.images || [])
@@ -73,21 +73,14 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
             if (!e.target.files || e.target.files.length === 0) return
 
             const file = e.target.files[0]
-            const fileExt = file.name.split('.').pop()
-            const fileName = `${Math.random()}.${fileExt}`
-            const filePath = `${fileName}`
+            const formData = new FormData()
+            formData.append('file', file)
 
-            const { error: uploadError } = await supabase.storage
-                .from('products')
-                .upload(filePath, file)
+            const { success, url, error } = await uploadImage(formData)
 
-            if (uploadError) throw uploadError
+            if (!success || error) throw new Error(error || 'Upload failed')
 
-            const { data: { publicUrl } } = supabase.storage
-                .from('products')
-                .getPublicUrl(filePath)
-
-            setImages((prev) => [...prev, publicUrl])
+            setImages((prev) => [...prev, url])
             toast.success('Image uploaded')
         } catch (error: any) {
             toast.error('Error uploading image: ' + error.message)
@@ -112,17 +105,12 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
             let error
             if (initialData) {
                 // Update
-                const { error: updateError } = await supabase
-                    .from('products')
-                    .update(payload)
-                    .eq('id', initialData.id)
-                error = updateError
+                const result = await updateProduct(initialData.id, payload)
+                if (result.error) error = { message: result.error }
             } else {
                 // Create
-                const { error: createError } = await supabase
-                    .from('products')
-                    .insert([payload])
-                error = createError
+                const result = await createProduct(payload)
+                if (result.error) error = { message: result.error }
             }
 
             if (error) throw error

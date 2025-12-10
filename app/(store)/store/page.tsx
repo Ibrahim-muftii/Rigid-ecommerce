@@ -1,5 +1,6 @@
 import { createClient } from '@/utils/supabase/server'
 import { ProductCard } from '@/components/store/ProductCard'
+import { StoreSidebar } from '@/components/store/StoreSidebar'
 import Link from 'next/link'
 
 export default async function StorePage({
@@ -62,32 +63,7 @@ export default async function StorePage({
             <div className="flex flex-col md:flex-row gap-8">
 
                 {/* Sidebar Filters */}
-                <aside className="w-full md:w-64 space-y-8 border-r border-zinc-800 pr-8 hidden md:block">
-                    <div>
-                        <h3 className="font-bold text-white uppercase tracking-widest text-xs mb-6 border-b border-primary/50 pb-2 font-heading">Categories</h3>
-                        <ul className="space-y-3 text-sm font-mono uppercase tracking-wide">
-                            <li>
-                                <Link href="/store" className={`block transition-colors ${!category ? 'font-bold text-primary pl-2 border-l-2 border-primary' : 'text-white/75 hover:text-white'}`}>All Parts</Link>
-                            </li>
-                            {categories?.map((cat) => (
-                                <li key={cat.id}>
-                                    <Link href={`/store?q=${cat.name}`} className="block text-white/75 hover:text-white transition-colors hover:translate-x-1 transform duration-200">
-                                        {cat.name}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    <div>
-                        <h3 className="font-bold text-white uppercase tracking-widest text-xs mb-6 border-b border-primary/50 pb-2 font-heading">Sort by Specs</h3>
-                        <div className="space-y-3 text-sm text-white/75 font-mono uppercase tracking-wide">
-                            <Link href="?sort=newest" className="block hover:text-white transition-colors">Newest Arrivals</Link>
-                            <Link href="?sort=price_asc" className="block hover:text-white transition-colors">Price: Low to High</Link>
-                            <Link href="?sort=price_desc" className="block hover:text-white transition-colors">Price: High to Low</Link>
-                        </div>
-                    </div>
-                </aside>
+                <StoreSidebar categories={categories || []} />
 
                 {/* Product Grid */}
                 <div className="flex-1">

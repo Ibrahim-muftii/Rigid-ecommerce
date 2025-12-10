@@ -16,12 +16,12 @@ export function CartSidebar() {
         <>
             {/* Backdrop */}
             <div
-                className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[60] animate-in fade-in duration-300"
+                className="fixed inset-0 bg-black/80 backdrop-blur-sm z-60 animate-in fade-in duration-300"
                 onClick={toggleCart}
             ></div>
 
             {/* Sidebar */}
-            <div className="fixed inset-y-0 right-0 w-full md:w-[450px] bg-zinc-950 border-l border-zinc-800 z-[70] shadow-2xl transform transition-transform duration-300 ease-out animate-in slide-in-from-right flex flex-col">
+            <div className="fixed inset-y-0 right-0 w-full md:w-[450px] bg-zinc-950 border-l border-zinc-800 z-70 shadow-2xl transform transition-transform duration-300 ease-out animate-in slide-in-from-right flex flex-col">
                 <div className="flex items-center justify-between p-6 border-b border-zinc-800 bg-zinc-900/50">
                     <div className="flex items-center gap-3">
                         <ShoppingBag className="text-primary" />
@@ -43,7 +43,7 @@ export function CartSidebar() {
                     ) : (
                         items.map((item) => (
                             <div key={item.id} className="flex gap-4 bg-zinc-900/30 p-4 rounded-sm border border-zinc-900 hover:border-zinc-800 transition-colors group">
-                                <div className="relative w-20 h-20 bg-zinc-900 rounded-sm overflow-hidden flex-shrink-0 border border-zinc-800">
+                                <div className="relative w-20 h-20 bg-zinc-900 rounded-sm overflow-hidden shrink-0 border border-zinc-800">
                                     {item.image ? (
                                         // eslint-disable-next-line @next/next/no-img-element
                                         <img src={item.image} alt={item.title} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />

@@ -33,6 +33,16 @@ function CategoryForm() {
                 />
             </div>
 
+            <div className="flex items-center gap-3 pt-2 border-t border-zinc-900">
+                <input
+                    type="checkbox"
+                    name="show_on_home"
+                    id="show_on_home"
+                    className="h-5 w-5 rounded border-zinc-700 bg-zinc-900 text-primary focus:ring-primary focus:ring-offset-zinc-900"
+                />
+                <label htmlFor="show_on_home" className="text-sm font-bold text-white uppercase tracking-wider">Show on Home Page (Limit 4)</label>
+            </div>
+
             <button
                 type="submit"
                 className="bg-primary text-black font-black uppercase tracking-wider px-10 py-4 rounded-sm hover:bg-white hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] transition-all flex items-center gap-2 clip-path-slant shadow-[0_0_10px_rgba(250,204,21,0.3)]"
@@ -50,7 +60,7 @@ export default function CreateCategoryPage() {
 
             <div className="bg-zinc-900/40 border border-zinc-800 p-8 rounded-sm backdrop-blur-md relative overflow-hidden">
                 {/* Tech Overlay Lines */}
-                <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent"></div>
+                <div className="absolute top-0 left-0 w-full h-px bg-linear-to-r from-transparent via-primary/20 to-transparent"></div>
                 <div className="absolute bottom-0 right-0 w-24 h-24 bg-primary/5 blur-3xl rounded-full"></div>
 
                 <CategoryForm />

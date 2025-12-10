@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { LayoutDashboard, Package, Tag, Image as ImageIcon, Settings, LogOut, Menu, X } from 'lucide-react'
-import { createClient } from '@/utils/supabase/client'
+import { signOut } from '@/app/login/actions'
 import { useRouter } from 'next/navigation'
 
 const menuItems = [
@@ -17,13 +17,10 @@ const menuItems = [
 export function AdminSidebar() {
     const pathname = usePathname()
     const router = useRouter()
-    const supabase = createClient()
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
     const handleSignOut = async () => {
-        await supabase.auth.signOut()
-        router.refresh()
-        router.push('/login')
+        await signOut()
     }
 
     const SidebarContent = () => (

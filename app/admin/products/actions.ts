@@ -18,11 +18,34 @@ export async function deleteProduct(id: string) {
 }
 
 // Placeholder for Create/Update - will implement with the form
-export async function createProduct(formData: FormData) {
-    const supabase = await createClient()
-    // Extraction logic here
-    // ...
 
-    // revalidatePath('/admin/products')
-    // redirect('/admin/products')
+export async function createProduct(product: any) {
+    const supabase = await createClient()
+
+    const { error } = await supabase
+        .from('products')
+        .insert([product])
+
+    if (error) {
+        return { error: error.message }
+    }
+
+    revalidatePath('/admin/products')
+    return { success: true }
+}
+
+export async function updateProduct(id: string, product: any) {
+    const supabase = await createClient()
+
+    const { error } = await supabase
+        .from('products')
+        .update(product)
+        .eq('id', id)
+
+    if (error) {
+        return { error: error.message }
+    }
+
+    revalidatePath('/admin/products')
+    return { success: true }
 }

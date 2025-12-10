@@ -68,7 +68,7 @@ export default async function ProductsPage({
 
             <div className="bg-zinc-900/40 rounded-sm shadow-xl border border-zinc-800 backdrop-blur-md overflow-hidden relative">
                 {/* Tech Overlay Lines */}
-                <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/20 to-transparent"></div>
+                <div className="absolute top-0 left-0 w-full h-px bg-linear-to-r from-transparent via-primary/20 to-transparent"></div>
 
                 <div className="overflow-x-auto">
                     <table className="w-full text-left text-sm">
